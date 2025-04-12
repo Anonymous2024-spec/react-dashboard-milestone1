@@ -41,7 +41,8 @@ src/ ├── components/ │ └── Navbar.jsx ├── pages/ │ ├─�
    cd react-dashboard-milestone1
 npm install
 npm run dev
-🧩 Tech Stack
+
+🧩  Tech Stack
 React
 
 React Router DOM
