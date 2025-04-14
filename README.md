@@ -1,12 +1,52 @@
-# React + Vite
+# React Dashboard – Milestone 1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a basic client-side dashboard layout built using **React**, **React Router**, and **Tailwind CSS**. It’s part of a milestone task to scaffold the navigational shell of a dashboard application.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ✅ React routing with `react-router-dom`
+- ✅ Three core sections:
+  - `/` or `/dashboard` – Main overview
+  - `/transactions` – Transactions page
+  - `/settings` – Settings placeholder
+- ✅ Simple top navigation bar
+- ✅ Tailwind CSS for styling
+- ✅ Clean, beginner-friendly structure
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧠 Purpose
+
+The goal of this milestone is to:
+
+- Set up page routing in a React app
+- Establish the layout structure early
+- Allow users to navigate between defined sections, even before final UI and data is implemented
+
+---
+
+## 📂 Project Structure
+src/ ├── components/ │ └── Navbar.jsx ├── pages/ │ ├── Dashboard.jsx │ ├── Transactions.jsx │ └── Settings.jsx ├── App.jsx └── main.jsx
+
+---
+
+## 🛠️ Getting Started
+
+1. Clone the repo:
+
+   ```bash
+   git clone https://github.com/your-username/react-dashboard-milestone1
+   cd react-dashboard-milestone1
+npm install
+npm run dev
+
+🧩  Tech Stack
+React
+
+React Router DOM
+
+Tailwind CSS
+
+Vite (for faster builds)
