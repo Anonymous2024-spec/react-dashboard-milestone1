@@ -11,6 +11,20 @@ A modern finance dashboard built with React, Zustand, Tailwind CSS, Shadcn/UI, a
 - 🧠 Zustand for global state management
 - 🧭 Routing with react-router-dom
 
+🏠 Dashboard
+Displays key metrics like Total Income, Total Expenses, and Net Balance using reusable Card components.
+
+Clean grid-based layout for summary widgets.
+
+📃 Transactions
+Lists transactions using modular TransactionList and TransactionItem components.
+
+Displays mock data from data/mockTransactions.js.
+
+Handles empty state with conditional rendering.
+
+Future-ready for integration with SWR.
+
 ## 🧰 Tech Stack
 
 | Tool         | Purpose                     |
