@@ -29,7 +29,7 @@ const navigationItems = [
 
 export function AppSidebar() {
   return (
-    <Sidebar className="h-screen border-r w-64">
+    <Sidebar className="border-r w-64">
       <SidebarContent className="flex flex-col h-full">
         {/* Header with project name and icon */}
         <div className="p-4 flex items-center justify-between border-b">

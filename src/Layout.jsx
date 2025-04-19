@@ -4,12 +4,13 @@ import { AppSidebar } from "@/components/Sidebar";
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function Layout({ children }) {
+export default function Layout() {
   return (
     <SidebarProvider>
       <div className="flex h-screen overflow-hidden">
         <AppSidebar />
-        <div className="flex-1 flex flex-col">
+
+        <div className="flex-1 flex flex-col min-w-0">
           {/* Breadcrumb Navigation */}
           <div className="border-b p-4 flex items-center">
             <Link to="/" className="text-gray-600 hover:text-gray-900">
@@ -21,9 +22,8 @@ export default function Layout({ children }) {
 
           {/* Main Content */}
           <div className="flex-1 overflow-auto">
-            <main className="p-6">
+            <main className="p-6 max-w-7xl mx-auto w-full">
               <Outlet />
-              {children}
             </main>
           </div>
         </div>
