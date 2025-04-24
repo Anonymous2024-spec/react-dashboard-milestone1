@@ -10,9 +10,9 @@ const Dashboard = () => {
   // Render loading states for the cards
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
         {[1, 2, 3].map((index) => (
-          <Card key={index}>
+          <Card key={index} className="w-full">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 <Skeleton className="h-4 w-24" />
@@ -31,7 +31,7 @@ const Dashboard = () => {
   // Render error state
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 text-red-800 rounded-md p-4">
+      <div className="w-full bg-red-50 border border-red-200 text-red-800 rounded-md p-4">
         <p className="font-medium">Error loading summary data</p>
         <p className="text-sm">Please try refreshing the page</p>
       </div>
@@ -40,8 +40,8 @@ const Dashboard = () => {
 
   // Render data state
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card>
+    <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+      <Card className="w-full">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Income</CardTitle>
         </CardHeader>
@@ -52,7 +52,7 @@ const Dashboard = () => {
           </p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="w-full">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
         </CardHeader>
@@ -63,7 +63,7 @@ const Dashboard = () => {
           </p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="w-full">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Net Balance</CardTitle>
         </CardHeader>
