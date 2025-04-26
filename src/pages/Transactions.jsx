@@ -41,32 +41,33 @@ const { filters, setFilters } = useTransactionsStore();
   const applyFilters = () => {
     setFilters(localFilters);
   };
-if (loading) {
-    return (
-      <div className="w-full">
-        <h2 className="text-2xl font-bold mb-6">Transactions</h2>
-        <div className="w-full border rounded-md overflow-hidden p-4">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="flex items-center justify-between py-2 border-b">
-              <Skeleton className="h-4 w-24" />
-              <Skeleton className="h-4 w-48" />
-              <Skeleton className="h-4 w-32" />
-              <Skeleton className="h-4 w-16" />
-            </div>
-          ))}
-        </div>
+  
+  if (loading) {
+  return (
+    <div className="w-full">
+      <h2 className="text-2xl font-bold mb-6">Transactions</h2>
+      <div className="w-full border rounded-md overflow-hidden p-4">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className="flex items-center justify-between py-2 border-b">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-4 w-48" />
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-4 w-16" />
+          </div>
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  if (error) {
-    return (
-      <div className="w-full bg-red-50 border border-red-200 text-red-800 rounded-md p-4">
-        <p className="font-medium">Error loading transactions</p>
-        <p className="text-sm">Please try refreshing the page</p>
-      </div>
-    );
-  }
+if (error) {
+  return (
+    <div className="w-full bg-red-50 border border-red-200 text-red-800 rounded-md p-4">
+      <p className="font-medium">Error loading transactions</p>
+      <p className="text-sm">Please try refreshing the page</p>
+    </div>
+  );
+}
 
   return (
     <div className="w-full">
