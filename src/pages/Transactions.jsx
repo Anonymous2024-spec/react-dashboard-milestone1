@@ -11,21 +11,22 @@ import TransactionList from "./TransactionList";
 
 const Transactions = () => {
   const { transactions, loading, error } = useTransactions();
-  const { filters, setFilters } = useTransactionsStore();
+const { filters, setType, setCategory, setDateRange } = useTransactionsStore();
 
   // Get unique categories dynamically
   const categories = [...new Set(transactions.map((txn) => txn.category))];
 
+ // Handlers
   const handleTypeChange = (value) => {
-    setFilters({ type: value });
+    setType(value);  // call setType directly
   };
 
   const handleCategoryChange = (value) => {
-    setFilters({ category: value });
+    setCategory(value);  // call setCategory directly
   };
 
   const handleDateRangeChange = (range) => {
-    setFilters({ dateRange: range });
+    setDateRange(range); // call setDateRange directly
   };
 
   if (loading) {

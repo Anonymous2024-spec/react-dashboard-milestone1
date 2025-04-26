@@ -5,7 +5,7 @@ import { create } from "zustand";
 export const useTransactionsStore = create((set) => ({
   transactions: [],
   filters: {
-  ateRange: {
+    dateRange: {   // ✅ fixed typo here
       from: null,
       to: null,
     },
@@ -21,6 +21,17 @@ export const useTransactionsStore = create((set) => ({
   setError: (error) => set({ error }),
   setTransactions: (transactions) => set({ transactions }),
   setSummary: (summary) => set({ summary }),
+
+  // New better actions (optional for cleaner updating)
+  setType: (type) => set((state) => ({
+    filters: { ...state.filters, type },
+  })),
+  setCategory: (category) => set((state) => ({
+    filters: { ...state.filters, category },
+  })),
+  setDateRange: (dateRange) => set((state) => ({
+    filters: { ...state.filters, dateRange },
+  })),
 
   // fetch from the api layer service
   fetchData: async () => {
