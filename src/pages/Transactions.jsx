@@ -1,43 +1,46 @@
 import React from "react";
 import { useTransactions } from "@/hooks/useTransactions";
+import { useTransactionsStore } from "@/store/transactionStore";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import TransactionList from "./TransactionList";
 
 const Transactions = () => {
   const { transactions, loading, error } = useTransactions();
+  const { filters, setFilters } = useTransactionsStore();
+
+  // Get unique categories dynamically
+  const categories = [...new Set(transactions.map((txn) => txn.category))];
+
+  const handleTypeChange = (value) => {
+    setFilters({ type: value });
+  };
+
+  const handleCategoryChange = (value) => {
+    setFilters({ category: value });
+  };
+
+  const handleDateRangeChange = (range) => {
+    setFilters({ dateRange: range });
+  };
 
   if (loading) {
     return (
       <div className="w-full">
         <h2 className="text-2xl font-bold mb-6">Transactions</h2>
-        <div className="w-full border rounded-md overflow-hidden">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[200px]">Date</TableHead>
-                <TableHead className="w-[300px]">Description</TableHead>
-                <TableHead className="w-[200px]">Category</TableHead>
-                <TableHead className="w-[100px] text-right">Amount</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {[1, 2, 3, 4, 5].map((i) => (
-                <TableRow key={i}>
-                  <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-48" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-                  <TableCell className="text-right"><Skeleton className="h-4 w-16 ml-auto" /></TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+        <div className="w-full border rounded-md overflow-hidden p-4">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="flex items-center justify-between py-2 border-b">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-4 w-48" />
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-4 w-16" />
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -52,45 +55,81 @@ const Transactions = () => {
     );
   }
 
-  if (transactions.length === 0) {
-    return (
-      <div className="w-full text-center py-10">
-        <h2 className="text-2xl font-bold mb-2">No Transactions Found</h2>
-        <p className="text-gray-600">
-          You don't have any transactions recorded yet.
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div className="w-full">
       <h2 className="text-2xl font-bold mb-6">Transactions</h2>
-      <div className="w-full border rounded-md overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[200px]">Date</TableHead>
-              <TableHead className="w-[300px]">Description</TableHead>
-              <TableHead className="w-[200px]">Category</TableHead>
-              <TableHead className="w-[100px] text-right">Amount</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {transactions.map((tx) => (
-              <TableRow key={tx.id}>
-                <TableCell>{tx.date}</TableCell>
-                <TableCell>{tx.description}</TableCell>
-                <TableCell>{tx.category}</TableCell>
-                <TableCell className={`text-right font-medium ${tx.type === "income" ? "text-green-600" : "text-red-600"}`}>
-                  {tx.type === "income" ? "+" : "-"}
-                  {tx.amount}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+
+      {/* Filter Bar */}
+      <div className="flex flex-wrap gap-4 mb-6 bg-white p-4 rounded-md shadow-sm">
+        {/* Transaction Type */}
+        <div className="w-48">
+          <Select onValueChange={handleTypeChange} value={filters.type}>
+            <SelectTrigger>
+              <SelectValue placeholder="Transaction Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="income">Income</SelectItem>
+              <SelectItem value="expense">Expense</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Category */}
+        <div className="w-48">
+          <Select onValueChange={handleCategoryChange} value={filters.category}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select Category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All</SelectItem>
+              {categories.map((cat) => (
+                <SelectItem key={cat} value={cat}>
+                  {cat}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Date Range */}
+        <div className="w-64">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-full justify-start text-left font-normal",
+                  !filters.dateRange?.from && "text-muted-foreground"
+                )}
+              >
+                {filters.dateRange?.from ? (
+                  filters.dateRange.to ? (
+                    <>
+                      {filters.dateRange.from.toLocaleDateString()} - {filters.dateRange.to.toLocaleDateString()}
+                    </>
+                  ) : (
+                    filters.dateRange.from.toLocaleDateString()
+                  )
+                ) : (
+                  "Pick a date range"
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="range"
+                selected={filters.dateRange}
+                onSelect={handleDateRangeChange}
+                numberOfMonths={2}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
       </div>
+
+      {/* Transaction List */}
+      <TransactionList transactions={transactions} />
     </div>
   );
 };

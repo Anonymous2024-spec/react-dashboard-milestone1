@@ -5,8 +5,12 @@ import { create } from "zustand";
 export const useTransactionsStore = create((set) => ({
   transactions: [],
   filters: {
-    dateRange: null,
-    category: null,
+  ateRange: {
+      from: null,
+      to: null,
+    },
+    category: "all",
+    type: "all",
   },
   loading: false,
   error: null,
