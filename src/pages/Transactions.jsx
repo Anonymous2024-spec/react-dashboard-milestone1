@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useTransactionsStore } from "@/store/transactionStore";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -11,25 +12,36 @@ import TransactionList from "./TransactionList";
 
 const Transactions = () => {
   const { transactions, loading, error } = useTransactions();
-const { filters, setType, setCategory, setDateRange } = useTransactionsStore();
+const { filters, setFilters } = useTransactionsStore();
+
+   // Local component state for filter values
+  const [localFilters, setLocalFilters] = useState({
+    type: filters.type,
+    category: filters.category,
+    dateRange: filters.dateRange,
+  });
 
   // Get unique categories dynamically
   const categories = [...new Set(transactions.map((txn) => txn.category))];
 
- // Handlers
+  // Handle filter value changes
   const handleTypeChange = (value) => {
-    setType(value);  // call setType directly
+    setLocalFilters((prevState) => ({ ...prevState, type: value }));
   };
 
   const handleCategoryChange = (value) => {
-    setCategory(value);  // call setCategory directly
+    setLocalFilters((prevState) => ({ ...prevState, category: value }));
   };
 
   const handleDateRangeChange = (range) => {
-    setDateRange(range); // call setDateRange directly
+    setLocalFilters((prevState) => ({ ...prevState, dateRange: range }));
   };
 
-  if (loading) {
+  // Commit the local state to Zustand store (on change or on "Apply Filters")
+  const applyFilters = () => {
+    setFilters(localFilters);
+  };
+if (loading) {
     return (
       <div className="w-full">
         <h2 className="text-2xl font-bold mb-6">Transactions</h2>
@@ -64,7 +76,7 @@ const { filters, setType, setCategory, setDateRange } = useTransactionsStore();
       <div className="flex flex-wrap gap-4 mb-6 bg-white p-4 rounded-md shadow-sm">
         {/* Transaction Type */}
         <div className="w-48">
-          <Select onValueChange={handleTypeChange} value={filters.type}>
+          <Select onValueChange={handleTypeChange} value={localFilters.type}>
             <SelectTrigger>
               <SelectValue placeholder="Transaction Type" />
             </SelectTrigger>
@@ -78,7 +90,7 @@ const { filters, setType, setCategory, setDateRange } = useTransactionsStore();
 
         {/* Category */}
         <div className="w-48">
-          <Select onValueChange={handleCategoryChange} value={filters.category}>
+          <Select onValueChange={handleCategoryChange} value={localFilters.category}>
             <SelectTrigger>
               <SelectValue placeholder="Select Category" />
             </SelectTrigger>
@@ -101,16 +113,16 @@ const { filters, setType, setCategory, setDateRange } = useTransactionsStore();
                 variant="outline"
                 className={cn(
                   "w-full justify-start text-left font-normal",
-                  !filters.dateRange?.from && "text-muted-foreground"
+                  !localFilters.dateRange?.from && "text-muted-foreground"
                 )}
               >
-                {filters.dateRange?.from ? (
-                  filters.dateRange.to ? (
+                {localFilters.dateRange?.from ? (
+                  localFilters.dateRange.to ? (
                     <>
-                      {filters.dateRange.from.toLocaleDateString()} - {filters.dateRange.to.toLocaleDateString()}
+                      {localFilters.dateRange.from.toLocaleDateString()} - {localFilters.dateRange.to.toLocaleDateString()}
                     </>
                   ) : (
-                    filters.dateRange.from.toLocaleDateString()
+                    localFilters.dateRange.from.toLocaleDateString()
                   )
                 ) : (
                   "Pick a date range"
@@ -120,13 +132,18 @@ const { filters, setType, setCategory, setDateRange } = useTransactionsStore();
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="range"
-                selected={filters.dateRange}
+                selected={localFilters.dateRange}
                 onSelect={handleDateRangeChange}
                 numberOfMonths={2}
               />
             </PopoverContent>
           </Popover>
         </div>
+      </div>
+
+      {/* Apply Filters Button */}
+      <div className="flex justify-end mb-6">
+        <Button onClick={applyFilters}>Apply Filters</Button>
       </div>
 
       {/* Transaction List */}
