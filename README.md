@@ -1,52 +1,78 @@
-# Finance Dashboard App 💰
-
+Finance Dashboard App 💰
 A modern finance dashboard built with React, Zustand, Tailwind CSS, Shadcn/UI, and SWR. Displays mock transaction data, account summaries, and more.
 
-## 🚀 Features
+🚀 Features
+📊 Transaction Tracking
+View a list of transactions with dynamic filtering options (by type, date, category).
 
-- 📊 Transaction tracking with filters
-- 📁 Account summary overview
-- 🔄 Data fetching using SWR
-- 🎨 Fully styled with TailwindCSS & Shadcn/UI
-- 🧠 Zustand for global state management
-- 🧭 Routing with react-router-dom
+🧹 Advanced Filters
+Filter transactions using:
 
+Transaction Type (Income, Expense, All)
+
+(Coming soon) Date Range
+
+(Coming soon) Category Built with reusable Select, DatePicker, and Combobox components from Shadcn/UI.
+
+📁 Account Summary Overview
+Displays key metrics like Total Income, Total Expenses, Net Balance using reusable Card components.
+
+🔄 Data Fetching with SWR
+Mock data integration with future-ready SWR fetching structure.
+
+🎨 Styled with TailwindCSS & Shadcn/UI
+Professional responsive UI with clean components.
+
+🧠 Global State Management with Zustand
+Centralized state for transactions, filters, loading and error handling.
+
+🧭 Routing with react-router-dom
+Dashboard, Transactions, and Settings pages.
+
+✨ Loading Skeletons & Empty State Handling
+Beautiful skeleton UI for loading states, and clear messaging when no data is available.
+
+🧰 Tech Stack
+
+Tool | Purpose
+React | UI Framework
+Tailwind CSS | Styling
+Zustand | State Management
+SWR | Data fetching
+Shadcn/UI | Accessible UI components
+Vite | Fast dev server and bundler
+
+
+🏛️ Pages
 🏠 Dashboard
-Displays key metrics like Total Income, Total Expenses, and Net Balance using reusable Card components.
+Displays summary widgets in a responsive grid.
 
-Clean grid-based layout for summary widgets.
+Metrics: Total Income, Total Expenses, Net Balance.
+
+Built with reusable Card components.
 
 📃 Transactions
-Lists transactions using modular TransactionList and TransactionItem components.
+Lists all transactions using modular TransactionList and TransactionItem components.
+
+Filter by Transaction Type (Income, Expense, All).
+
+(Coming soon) Filter by Date Range and Category.
 
 Displays mock data from data/mockTransactions.js.
 
-Handles empty state with conditional rendering.
+Handles empty states gracefully.
 
-Future-ready for integration with SWR.
+⚙️ Settings
+Placeholder page for future settings integration.
 
-## 🧰 Tech Stack
-
-| Tool         | Purpose                     |
-| ------------ | --------------------------- |
-| React        | UI Framework                |
-| Tailwind CSS | Styling                     |
-| Zustand      | State Management            |
-| SWR          | Data fetching               |
-| Shadcn/UI    | Accessible UI components    |
-| Vite         | Fast dev server and bundler |
-
-## 🗂️ Folder Structure
-
-```bash
+🗂️ Folder Structure
 src/
-├── components/        # Page-level components (Dashboard, Transactions, Settings)
-├── pages/
-├── data/
-├── store/             # Zustand store for state
+├── components/        # Reusable components (Sidebar, Header, Footer, TransactionItem, TransactionList)
+├── pages/             # Page components (Dashboard, Transactions, Settings)
+├── data/              # Mock data (transactions, summaries)
+├── store/             # Zustand store (state management)
 ├── hooks/             # SWR-based custom hooks
 ├── lib/               # Utility functions
-├── services/          # API service layer
-├── App.jsx            # Main layout with routes
-├── index.css          # TailwindCSS + theme setup
-```
+├── services/          # API service layer (mock services for now)
+├── App.jsx            # Main application layout with routes
+├── index.css          # TailwindCSS + Theme setup
