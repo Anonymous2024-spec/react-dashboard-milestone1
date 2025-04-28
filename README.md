@@ -76,3 +76,4 @@ src/
 ├── services/          # API service layer (mock services for now)
 ├── App.jsx            # Main application layout with routes
 ├── index.css          # TailwindCSS + Theme setup
+

@@ -107,7 +107,7 @@ export const transactions = [
 
 export const accountSummary = {
   totalIncome: 7300,
-  totalExpenses: 820,
+  totalExpenses: 5020,
   netBalance: 6480,
   savingsGoalProgress: 75,
 };

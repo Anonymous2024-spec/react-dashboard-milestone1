@@ -1,8 +1,8 @@
-// src/pages/Dashboard.jsx
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSummary } from "@/hooks/useSummary";
+import IncomeVsExpensesChart from "@/components/IncomeVsExpensesChart"; 
 
 const Dashboard = () => {
   const { summary, loading, error } = useSummary();
@@ -41,6 +41,7 @@ const Dashboard = () => {
   // Render data state
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Existing summary cards */}
       <Card className="w-full">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Income</CardTitle>
@@ -72,6 +73,19 @@ const Dashboard = () => {
           <p className="text-xs text-muted-foreground">
             Current net balance status
           </p>
+        </CardContent>
+      </Card>
+
+      {/* Chart to display Total Income vs Total Expenses dynamically */}
+      <Card className="w-full col-span-3 mt-8">
+        <CardHeader>
+          <CardTitle className="text-sm font-medium">Income vs Expenses</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <IncomeVsExpensesChart 
+            totalIncome={summary?.totalIncome || 0} 
+            totalExpenses={summary?.totalExpenses || 0} 
+          />
         </CardContent>
       </Card>
     </div>
