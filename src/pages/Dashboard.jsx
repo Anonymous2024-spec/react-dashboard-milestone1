@@ -40,62 +40,65 @@ const Dashboard = () => {
     );
   }
 
-  // Render data state
-  return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-      {/* Existing summary cards */}
-      <Card className="w-full">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Income</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">${summary?.totalIncome || 0}</div>
-          <p className="text-xs text-muted-foreground">
-            All income for current period
-          </p>
-        </CardContent>
-      </Card>
-      <Card className="w-full">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">${summary?.totalExpenses || 0}</div>
-          <p className="text-xs text-muted-foreground">
-            All expenses for current period
-          </p>
-        </CardContent>
-      </Card>
-      <Card className="w-full">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Net Balance</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">${summary?.netBalance || 0}</div>
-          <p className="text-xs text-muted-foreground">
-            Current net balance status
-          </p>
-        </CardContent>
-      </Card>
+ // Render data state
+return (
+  <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+    {/* Summary cards */}
+    <Card className="w-full">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium">Total Income</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">${summary?.totalIncome || 0}</div>
+        <p className="text-xs text-muted-foreground">All income for current period</p>
+      </CardContent>
+    </Card>
 
-      {/* Chart to display Total Income vs Total Expenses dynamically */}
-      <Card className="w-full col-span-3 mt-8">
-        <CardHeader>
-          <CardTitle className="text-sm font-medium">Income vs Expenses</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <IncomeVsExpensesChart 
-            totalIncome={summary?.totalIncome || 0} 
-            totalExpenses={summary?.totalExpenses || 0} 
-          />
-          <div className="mt-8">
-          <h2 className="text-lg font-semibold mb-4">Expenses by Category</h2>
-          <ExpensesByCategoryChart transactions={transactions} />
-            </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+    <Card className="w-full">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">${summary?.totalExpenses || 0}</div>
+        <p className="text-xs text-muted-foreground">All expenses for current period</p>
+      </CardContent>
+    </Card>
+
+    <Card className="w-full">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium">Net Balance</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">${summary?.netBalance || 0}</div>
+        <p className="text-xs text-muted-foreground">Current net balance status</p>
+      </CardContent>
+    </Card>
+
+    {/* Bar Chart: Income vs Expenses */}
+    <Card className="w-full col-span-3 mt-8">
+      <CardHeader>
+        <CardTitle className="text-sm font-medium">Income vs Expenses</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <IncomeVsExpensesChart 
+          totalIncome={summary?.totalIncome || 0} 
+          totalExpenses={summary?.totalExpenses || 0} 
+        />
+      </CardContent>
+    </Card>
+
+    {/* Pie Chart: Expenses by Category */}
+    <Card className="w-full col-span-3">
+      <CardHeader>
+        <CardTitle className="text-sm font-medium">Expenses by Category</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ExpensesByCategoryChart transactions={transactions} />
+      </CardContent>
+    </Card>
+  </div>
+);
+
 };
 
 export default Dashboard;
