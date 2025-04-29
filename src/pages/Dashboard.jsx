@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSummary } from "@/hooks/useSummary";
 import IncomeVsExpensesChart from "@/components/IncomeVsExpensesChart"; 
+import ExpensesByCategoryChart from "@/components/ExpensesByCategoryChart";
+import { transactions } from "@/data/mockTransactions";
 
 const Dashboard = () => {
   const { summary, loading, error } = useSummary();
@@ -86,6 +88,10 @@ const Dashboard = () => {
             totalIncome={summary?.totalIncome || 0} 
             totalExpenses={summary?.totalExpenses || 0} 
           />
+          <div className="mt-8">
+          <h2 className="text-lg font-semibold mb-4">Expenses by Category</h2>
+          <ExpensesByCategoryChart transactions={transactions} />
+            </div>
         </CardContent>
       </Card>
     </div>
