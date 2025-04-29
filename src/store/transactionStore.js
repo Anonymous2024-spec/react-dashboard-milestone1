@@ -1,11 +1,10 @@
-// import { transactions, accountSummary } from "@/data/mockTransactions";
 import { WorkspaceSummaryData, WorkspaceTransactions } from "@/services/api";
 import { create } from "zustand";
 
 export const useTransactionsStore = create((set) => ({
   transactions: [],
   filters: {
-    dateRange: {   // ✅ fixed typo here
+    dateRange: {   
       from: null,
       to: null,
     },

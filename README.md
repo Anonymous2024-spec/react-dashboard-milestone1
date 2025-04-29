@@ -1,79 +1,79 @@
-Finance Dashboard App 💰
-A modern finance dashboard built with React, Zustand, Tailwind CSS, Shadcn/UI, and SWR. Displays mock transaction data, account summaries, and more.
+# 💰 Finance Dashboard App
 
-🚀 Features
-📊 Transaction Tracking
-View a list of transactions with dynamic filtering options (by type, date, category).
+A modern finance dashboard built with **React**, **Zustand**, **Tailwind CSS**, **Shadcn/UI**, and **SWR**. Displays mock transaction data, account summaries, and more.
 
-🧹 Advanced Filters
-Filter transactions using:
+---
 
-Transaction Type (Income, Expense, All)
+## 🚀 Features
 
-(Coming soon) Date Range
+### 📊 Transaction Tracking  
+View a list of transactions with dynamic filtering options:
+- Filter by **Transaction Type** (Income, Expense, All)  
+- (Coming soon) **Date Range**
+- (Coming soon) **Category**  
 
-(Coming soon) Category Built with reusable Select, DatePicker, and Combobox components from Shadcn/UI.
+Built using Shadcn/UI components like `Select`, `DatePicker`, and `Combobox`.
 
-📁 Account Summary Overview
-Displays key metrics like Total Income, Total Expenses, Net Balance using reusable Card components.
+### 📁 Account Summary Overview  
+Displays key financial metrics using reusable Card components:
+- Total Income  
+- Total Expenses  
+- Net Balance  
 
-🔄 Data Fetching with SWR
-Mock data integration with future-ready SWR fetching structure.
+### 🔄 Data Fetching with SWR  
+Mock data integrated via a future-ready SWR structure for scalability.
 
-🎨 Styled with TailwindCSS & Shadcn/UI
-Professional responsive UI with clean components.
+### 🎨 Styled with TailwindCSS & Shadcn/UI  
+Clean, responsive UI with accessible components and utility-first styling.
 
-🧠 Global State Management with Zustand
-Centralized state for transactions, filters, loading and error handling.
+### 🧠 Global State Management with Zustand  
+Manages app-wide state:  
+- Transactions  
+- Filters  
+- Loading/Error handling  
 
-🧭 Routing with react-router-dom
-Dashboard, Transactions, and Settings pages.
+### 🧭 Routing with React Router  
+Routes included:
+- Dashboard
+- Transactions
+- Settings
 
-✨ Loading Skeletons & Empty State Handling
-Beautiful skeleton UI for loading states, and clear messaging when no data is available.
+### ✨ Loading Skeletons & Empty State Handling  
+Skeleton components for smooth UX and helpful empty-state messages when there's no data.
 
-🧰 Tech Stack
+---
 
-Tool | Purpose
-React | UI Framework
-Tailwind CSS | Styling
-Zustand | State Management
-SWR | Data fetching
-Shadcn/UI | Accessible UI components
-Vite | Fast dev server and bundler
+## 🧰 Tech Stack
 
+| Tool         | Purpose                     |
+|--------------|-----------------------------|
+| React        | UI Framework                |
+| Tailwind CSS | Styling                     |
+| Zustand      | State Management            |
+| SWR          | Data Fetching               |
+| Shadcn/UI    | Accessible UI Components    |
+| Vite         | Fast dev server and bundler |
 
-🏛️ Pages
-🏠 Dashboard
-Displays summary widgets in a responsive grid.
+---
 
-Metrics: Total Income, Total Expenses, Net Balance.
+## 🏛️ Pages
 
-Built with reusable Card components.
+### 🏠 Dashboard  
+- Responsive grid layout  
+- Summary metrics (Income, Expenses, Balance)  
+- Reusable card UI  
 
-📃 Transactions
-Lists all transactions using modular TransactionList and TransactionItem components.
+### 📃 Transactions  
+- Lists transactions using `TransactionItem` and `TransactionList`  
+- Filters:
+  - ✅ Type: Income, Expense, All  
+  - 🕐 Coming soon: Date Range and Category  
+- Handles empty and loading states  
 
-Filter by Transaction Type (Income, Expense, All).
+### ⚙️ Settings  
+- Placeholder UI for future preferences (username, currency, etc.)
 
-(Coming soon) Filter by Date Range and Category.
+---
 
-Displays mock data from data/mockTransactions.js.
-
-Handles empty states gracefully.
-
-⚙️ Settings
-Placeholder page for future settings integration.
-
-🗂️ Folder Structure
-src/
-├── components/        # Reusable components (Sidebar, Header, Footer, TransactionItem, TransactionList)
-├── pages/             # Page components (Dashboard, Transactions, Settings)
-├── data/              # Mock data (transactions, summaries)
-├── store/             # Zustand store (state management)
-├── hooks/             # SWR-based custom hooks
-├── lib/               # Utility functions
-├── services/          # API service layer (mock services for now)
-├── App.jsx            # Main application layout with routes
-├── index.css          # TailwindCSS + Theme setup
-
+## 🗂️ Folder Structure
+src/ ├── components/ # Reusable UI (Sidebar, Header, Footer, Cards, etc.) ├── pages/ # Route-based pages (Dashboard, Transactions, Settings) ├── data/ # Mock data files (transactions, summaries) ├── store/ # Zustand-based state management ├── hooks/ # Custom hooks (e.g., useSWRData) ├── lib/ # Utility functions ├── services/ # API service layer (mocked) ├── App.jsx # Main routing setup ├── index.css #

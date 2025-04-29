@@ -1,4 +1,3 @@
-// components/Footer.jsx
 import React from "react";
 
 export function Footer() {

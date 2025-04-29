@@ -1,4 +1,3 @@
-// components/Header.jsx
 import React from "react";
 import { Bell, Settings, User } from "lucide-react";
 
