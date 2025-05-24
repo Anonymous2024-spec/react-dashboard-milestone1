@@ -2,19 +2,30 @@ import React from "react";
 import { useState } from "react";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useTransactionsStore } from "@/store/transactionStore";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import TransactionList from "./TransactionList";
+import Paginate from "@/components/Paginate";
 
 const Transactions = () => {
   const { transactions, loading, error } = useTransactions();
-const { filters, setFilters } = useTransactionsStore();
+  const { filters, setFilters } = useTransactionsStore();
 
-   // Local component state for filter values
+  // Local component state for filter values
   const [localFilters, setLocalFilters] = useState({
     type: filters.type,
     category: filters.category,
@@ -41,33 +52,52 @@ const { filters, setFilters } = useTransactionsStore();
   const applyFilters = () => {
     setFilters(localFilters);
   };
-  
-  if (loading) {
-  return (
-    <div className="w-full">
-      <h2 className="text-2xl font-bold mb-6">Transactions</h2>
-      <div className="w-full border rounded-md overflow-hidden p-4">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="flex items-center justify-between py-2 border-b">
-            <Skeleton className="h-4 w-24" />
-            <Skeleton className="h-4 w-48" />
-            <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-4 w-16" />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
-if (error) {
-  return (
-    <div className="w-full bg-red-50 border border-red-200 text-red-800 rounded-md p-4">
-      <p className="font-medium">Error loading transactions</p>
-      <p className="text-sm">Please try refreshing the page</p>
-    </div>
-  );
-}
+  // Apply filters locally
+  const filteredTransactions = transactions.filter((txn) => {
+    const matchesType =
+      localFilters.type === "all" || txn.type === localFilters.type;
+
+    const matchesCategory =
+      localFilters.category === "all" || txn.category === localFilters.category;
+
+    const matchesDate =
+      !localFilters.dateRange?.from ||
+      (new Date(txn.date) >= new Date(localFilters.dateRange.from) &&
+        new Date(txn.date) <= new Date(localFilters.dateRange.to));
+
+    return matchesType && matchesCategory && matchesDate;
+  });
+
+  if (loading) {
+    return (
+      <div className="w-full">
+        <h2 className="text-2xl font-bold mb-6">Transactions</h2>
+        <div className="w-full border rounded-md overflow-hidden p-4">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div
+              key={i}
+              className="flex items-center justify-between py-2 border-b"
+            >
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-4 w-48" />
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-4 w-16" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-full bg-red-50 border border-red-200 text-red-800 rounded-md p-4">
+        <p className="font-medium">Error loading transactions</p>
+        <p className="text-sm">Please try refreshing the page</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -91,7 +121,10 @@ if (error) {
 
         {/* Category */}
         <div className="w-48">
-          <Select onValueChange={handleCategoryChange} value={localFilters.category}>
+          <Select
+            onValueChange={handleCategoryChange}
+            value={localFilters.category}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Select Category" />
             </SelectTrigger>
@@ -120,7 +153,8 @@ if (error) {
                 {localFilters.dateRange?.from ? (
                   localFilters.dateRange.to ? (
                     <>
-                      {localFilters.dateRange.from.toLocaleDateString()} - {localFilters.dateRange.to.toLocaleDateString()}
+                      {localFilters.dateRange.from.toLocaleDateString()} -{" "}
+                      {localFilters.dateRange.to.toLocaleDateString()}
                     </>
                   ) : (
                     localFilters.dateRange.from.toLocaleDateString()
@@ -147,8 +181,8 @@ if (error) {
         <Button onClick={applyFilters}>Apply Filters</Button>
       </div>
 
-      {/* Transaction List */}
-      <TransactionList transactions={transactions} />
+      {/* Transaction List - with pagination */}
+      <Paginate transactions={filteredTransactions} />
     </div>
   );
 };
