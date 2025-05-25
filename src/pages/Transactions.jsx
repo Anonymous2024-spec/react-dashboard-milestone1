@@ -18,7 +18,6 @@ import { Calendar } from "@/components/ui/calendar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import TransactionList from "./TransactionList";
 import Paginate from "@/components/Paginate";
 
 const Transactions = () => {

@@ -28,42 +28,43 @@ export default function Paginate({ transactions }) {
   return (
     <>
       <TransactionList transactions={PaginatedData} />
+      {transactions.length > 0 && (
+        <Pagination className="mt-6">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                onClick={() =>
+                  currentPage > 1 && handlePagechange(currentPage - 1)
+                }
+                className={
+                  currentPage === 1 ? "pointer-events-none opacity-50" : ""
+                }
+              />
+            </PaginationItem>
 
-      <Pagination className="mt-6">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              onClick={() =>
-                currentPage > 1 && handlePagechange(currentPage - 1)
-              }
-              className={
-                currentPage === 1 ? "pointer-events-none opacity-50" : ""
-              }
-            />
-          </PaginationItem>
+            <PaginationItem>
+              <PaginationLink>{currentPage}</PaginationLink>
+            </PaginationItem>
 
-          <PaginationItem>
-            <PaginationLink>{currentPage}</PaginationLink>
-          </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
 
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-
-          <PaginationItem>
-            <PaginationNext
-              onClick={() =>
-                currentPage < totalpages && handlePagechange(currentPage + 1)
-              }
-              className={
-                currentPage === totalpages
-                  ? "pointer-events-none opacity-50"
-                  : ""
-              }
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            <PaginationItem>
+              <PaginationNext
+                onClick={() =>
+                  currentPage < totalpages && handlePagechange(currentPage + 1)
+                }
+                className={
+                  currentPage === totalpages
+                    ? "pointer-events-none opacity-50"
+                    : ""
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </>
   );
 }

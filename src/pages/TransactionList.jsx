@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/table";
 import { useTransactionsStore } from "@/store/transactionStore";
 import TransactionItem from "./TransactionItem";
-import Paginate from "@/components/Paginate";
 
 export default function TransactionList({ transactions }) {
   const { filters } = useTransactionsStore();
@@ -70,8 +69,6 @@ export default function TransactionList({ transactions }) {
           </TableBody>
         </Table>
       </div>
-
-      {/* <Paginate /> */}
     </>
   );
 }
