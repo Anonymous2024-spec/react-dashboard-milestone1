@@ -60,7 +60,7 @@ export function AppSidebar() {
               <SidebarMenuButton asChild>
                 <Link
                   to={item.url}
-                  className="flex items-center justify-between py-2 px-4 hover:bg-gray-100 rounded-md"
+                  className="flex items-center justify-between py-2 px-4 font-bold hover:bg-gray-100 rounded-m"
                 >
                   <div className="flex items-center gap-3">
                     <item.icon size={18} className="text-gray-700" />
@@ -77,7 +77,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <Link
           to="/settings"
-          className="flex items-center justify-between p-4 hover:bg-gray-100 text-gray-700"
+          className="flex items-center justify-between p-4 font-bold hover:bg-gray-100 text-gray-700"
         >
           <div className="flex items-center gap-2">
             <Settings size={18} />
